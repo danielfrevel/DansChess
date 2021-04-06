@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Generation.Board">
+    <Position X="7.25" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAAACIAABAAAASAEgAABgAAAAAAAEgQAAIAhAAAiAAA=</HashCode>
+      <FileName>Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generation.LoadedPositionInfo">
+    <Position X="6.5" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generation.Fen">
+    <Position X="8.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACACAAAAAAAAAAAAAIAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generation.MoveGenerator">
+    <Position X="4.75" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAgABAAIAAAAAAABAAAABAAAUAAAAAAAIAACBAAABAA=</HashCode>
+      <FileName>MoveGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generation.Piece">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wACEAAAAIAEggAAEAEAAAAQABAAAABAAAEAACAEAAAA=</HashCode>
+      <FileName>Piece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PieceList">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAAAAAAAAAACAAACAwAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>PieceList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrecomputedMoveData">
+    <Position X="1.5" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAIAgAgCAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MoveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Generation.Move">
+    <Position X="2" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAA=</HashCode>
+      <FileName>Move.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
