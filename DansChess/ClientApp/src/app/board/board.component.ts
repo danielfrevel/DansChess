@@ -1,4 +1,4 @@
-import { SquareComponent } from "./square.component";
+import { SquareComponent } from "../square/square.component"
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -10,5 +10,7 @@ export class BoardComponent implements OnInit {
   squares: SquareComponent[];
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    //leeres board generieren
+  }
 }

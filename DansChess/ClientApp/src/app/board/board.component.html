@@ -1,3 +1,10 @@
 <div class="board">
-  <div class="square" *ngFor="let item of items"></div>
+  <app-square  *ngFor="let square of squares;m let i = index"
+         [piecenum] = "square[i]"
+          [index] = "i">
+    <app-piece pieceNum[]>
+
+    </app-piece>
+    
+  </app-square>
 </div>
