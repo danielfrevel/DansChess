@@ -18,5 +18,5 @@ export class SquareComponent implements OnInit, OnChanges {
     //piecenumber sollte sich verändern
   }
 
-
+  
 }

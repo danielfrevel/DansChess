@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DansChess",
+    "\\DansChess\\ClientApp",
+    "\\DansChess\\ClientApp\\src",
+    "\\DansChess\\ClientApp\\src\\app",
+    "\\DansChess\\ClientApp\\src\\app\\board",
+    "\\DansChess\\ClientApp\\src\\app\\home",
+    "\\DansChess\\ClientApp\\src\\app\\nav-menu",
+    "\\DansChess\\ClientApp\\src\\app\\square"
+  ],
+  "SelectedNode": "\\DansChess\\ClientApp\\src\\app\\app.module.ts",
+  "PreviewInSolutionExplorer": false
+}
