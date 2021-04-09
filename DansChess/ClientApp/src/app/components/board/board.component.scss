@@ -1,0 +1,5 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  max-width: 460px;
+}
