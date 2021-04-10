@@ -1,5 +1,5 @@
-<div class="board">
-  <ng-container *ngFor="let square of squares">
+<div class="board" *ngIf="board$ | async as seq">
+  <ng-container *ngFor="let square of seq">
     <app-square [model]="square"> </app-square>
   </ng-container>
 </div>

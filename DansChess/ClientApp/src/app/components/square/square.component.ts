@@ -1,13 +1,17 @@
+import { DataService } from './../../services/data.service';
 import { SquareModel } from 'app/models/SquareModel';
-import { Component, Input, OnInit } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
-import { NONE_TYPE } from '@angular/compiler';
-SquareModel;
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { Move } from 'app/models/MoveModel';
 @Component({
   selector: 'app-square',
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.scss'],
-  providers: [ConfigService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SquareComponent implements OnInit {
   @Input()
@@ -15,42 +19,50 @@ export class SquareComponent implements OnInit {
 
   public colorClass: string = 'black';
 
-  constructor(private config: ConfigService) {}
+  constructor(private data: DataService) {}
 
   ngOnInit(): void {}
 
-  pieceImage() {
+  showMoves() {
+    let moves: Move[] = [];
+    moves.forEach((move) => {
+      moves.push();
+    });
+
+    return moves;
+  }
+
+  getPieceImage() {
     switch (this.model.pieceNum) {
       case 0:
-        break;
+        return '';
       case 9:
-        break;
+        return 'assets/images/wK.png';
       case 10:
-        break;
+        return 'assets/images/wP.png';
       case 11:
-        break;
+        return 'assets/images/wK.png';
       case 13:
-        break;
+        return 'assets/images/wB.png';
       case 14:
-        break;
+        return 'assets/images/wR.png';
       case 15:
-        break;
+        return 'assets/images/wQ.png';
       case 17:
-        break;
+        return 'assets/images/bK.png';
       case 18:
-        break;
+        return 'assets/images/bP.png';
       case 19:
-        break;
+        return 'assets/images/bK.png';
       case 21:
-        break;
+        return 'assets/images/bB.png';
       case 22:
-        break;
+        return 'assets/images/bR.png';
       case 23:
-        break;
+        return 'assets/images/bQ.png';
 
       default:
-        return NONE_TYPE;
-        break;
+        return 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; //1pixel image
     }
   }
   isLight() {

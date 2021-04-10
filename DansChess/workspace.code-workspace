@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "./ClientApp",
+      "name": "AngularClient"
+    }
+  ],
+  "settings": {}
+}

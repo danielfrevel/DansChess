@@ -5,5 +5,5 @@
     light: isLight()
   }"
 >
-  <input type="image" [src]="pieceImage()" />
+  <input type="image" (click)="showMoves()" [src]="getPieceImage()" />
 </div>
