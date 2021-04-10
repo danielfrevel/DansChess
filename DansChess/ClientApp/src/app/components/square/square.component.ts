@@ -4,32 +4,35 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnInit,
 } from '@angular/core';
 import { Move } from 'app/models/MoveModel';
+import { take } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-square',
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SquareComponent implements OnInit {
+export class SquareComponent implements OnInit, OnChanges {
   @Input()
   public model!: SquareModel;
 
-  public colorClass: string = 'black';
+  public isHighlighted = false;
 
   constructor(private data: DataService) {}
 
   ngOnInit(): void {}
 
+  ngOnChanges(): void {
+    this.data.highlighted$.subscribe(
+      (val) => (this.isHighlighted = val.includes(this.model.index))
+    );
+  }
   showMoves() {
-    let moves: Move[] = [];
-    moves.forEach((move) => {
-      moves.push();
-    });
-
-    return moves;
+    this.data.setSelectedSquareModel(this.model);
   }
 
   getPieceImage() {

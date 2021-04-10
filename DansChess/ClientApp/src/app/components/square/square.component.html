@@ -2,7 +2,8 @@
   [ngClass]="{
     square: true,
     dark: !isLight(),
-    light: isLight()
+    light: isLight(),
+    highlighted: isHighlighted
   }"
 >
   <input type="image" (click)="showMoves()" [src]="getPieceImage()" />
