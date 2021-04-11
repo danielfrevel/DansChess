@@ -2,6 +2,7 @@ import { DataService } from './../../services/data.service';
 import { SquareModel } from 'app/models/SquareModel';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -16,23 +17,30 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./square.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SquareComponent implements OnInit, OnChanges {
+export class SquareComponent implements OnInit {
   @Input()
   public model!: SquareModel;
 
-  public isHighlighted = false;
+  public isHigligheted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(private data: DataService) {}
 
-  ngOnInit(): void {}
-
-  ngOnChanges(): void {
-    this.data.highlighted$.subscribe(
-      (val) => (this.isHighlighted = val.includes(this.model.index))
-    );
+  ngOnInit(): void {
+    this.data.highlighted$.subscribe((val) => {
+      // this.isHighlighted = val.includes(this.model.index);
+      this.isHigligheted$.next(val.includes(this.model.index));
+      // this.cdr.detectChanges();
+    });
   }
+
   showMoves() {
-    this.data.setSelectedSquareModel(this.model);
+    if (this.isHigligheted$.getValue()) {
+      this.data.makeMove(this.model);
+    } else {
+      this.data.setSelectedSquareModel(this.model);
+    }
   }
 
   getPieceImage() {
@@ -44,7 +52,7 @@ export class SquareComponent implements OnInit, OnChanges {
       case 10:
         return 'assets/images/wP.png';
       case 11:
-        return 'assets/images/wK.png';
+        return 'assets/images/wN.png';
       case 13:
         return 'assets/images/wB.png';
       case 14:
@@ -56,7 +64,7 @@ export class SquareComponent implements OnInit, OnChanges {
       case 18:
         return 'assets/images/bP.png';
       case 19:
-        return 'assets/images/bK.png';
+        return 'assets/images/bN.png';
       case 21:
         return 'assets/images/bB.png';
       case 22:

@@ -1,7 +1,8 @@
 .square {
-  position: relative;
+  display: block;
   width: 100px;
   height: 100px;
+  text-align: center;
 }
 .dark {
   background-color: rgb(36, 0, 121);
@@ -11,5 +12,5 @@
 }
 
 .highlighted {
-  background-color: red;
+  background-color: rgb(19, 90, 19);
 }

@@ -15,9 +15,9 @@ import { map, shareReplay, take, timeoutWith } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DataService {
-  private board: ReplaySubject<SquareModel[]> = new ReplaySubject<
+  private board: BehaviorSubject<SquareModel[]> = new BehaviorSubject<
     SquareModel[]
-  >();
+  >([]);
   private moves: BehaviorSubject<Move[]> = new BehaviorSubject<Move[]>([]);
   private highlighted: BehaviorSubject<number[]> = new BehaviorSubject<
     number[]
@@ -29,7 +29,7 @@ export class DataService {
   public currentSelectedSquare: BehaviorSubject<SquareModel> = new BehaviorSubject<SquareModel>(
     new SquareModel(0, 0)
   );
-  public baseUrl: string = 'http://localhost:5000/api/game';
+  public baseUrl: string = 'https://localhost:5001/game';
 
   public highlighted$: Observable<number[]> = combineLatest([
     this.currentSelectedSquare,
@@ -42,7 +42,6 @@ export class DataService {
     })
   );
   constructor(private http: HttpClient) {
-    this.genRandomMoves();
     // observebale => CurrentAvailableMoves
     // moves.filter(t => t.startIdx === currentSqr.Idx)
     // setCurrentSqr(currentsrq){
@@ -54,27 +53,40 @@ export class DataService {
     this.currentSelectedSquare.next(model);
   }
 
-  genRandomMoves() {
-    let randomoves: Move[] = [];
-
-    //for (let i = 0; i < 20; i++) {
-    randomoves.push(new Move(1, 2));
-    randomoves.push(new Move(1, 3));
-    randomoves.push(new Move(1, 4));
-    randomoves.push(new Move(1, 5));
-
-    //}
-
-    this.moves.next(randomoves);
+  makeMove(targetSquare: SquareModel) {
+    combineLatest([this.moves, this.currentSelectedSquare])
+      .pipe(take(1))
+      .subscribe((t) => {
+        this.applyMove(
+          t[0].filter(
+            (x) =>
+              x.startSquare === t[1].index &&
+              x.targetSquare === targetSquare.index
+          )[0]
+        );
+      });
   }
 
   initBoard() {
-    let squares: SquareModel[] = [];
-    for (let i = 0; i < 64; i++) {
-      let square = new SquareModel(i, Math.floor(Math.random() * 16) + 1);
-      squares.push(square);
-    }
-    this.board.next(squares);
+    // let squares: SquareModel[] = [];
+    // for (let i = 0; i < 64; i++) {
+    //   let square = new SquareModel(i, Math.floor(Math.random() * 16) + 1);
+    //   squares.push(square);
+    // }
+    // this.board.next(squares);
+    //public int[] BoardRepresentation { get; set; }
+    //    public IEnumerable<Move> Moves { get; set; }
+    //    public BoardResultModel()
+
+    this.loadBoard(true);
+  }
+
+  toSquareModel(squares: number[]): SquareModel[] {
+    let models: SquareModel[] = [];
+    squares.forEach((value, idx) => {
+      models.push(new SquareModel(idx, value));
+    });
+    return models;
   }
 
   initGame() {
@@ -83,12 +95,26 @@ export class DataService {
     //apiGetBoard() callen -> schickt die neuen Moves wieder
   }
 
-  apiGetBoard(): Observable<BoardResultModel> {
-    return this.http.get<BoardResultModel>(`${this.baseUrl}/GetBoard`);
+  loadBoard(createNew: boolean = false) {
+    this.apiGetBoard(createNew).subscribe((result) => {
+      this.board.next(this.toSquareModel(result.boardRepresentation));
+      this.moves.next(result.moves);
+    });
   }
 
-  apiMakeMove(move: Move): void {
-    this.http.post(`${this.baseUrl}/MakeMove`, move);
+  apiGetBoard(createNew: boolean = false): Observable<BoardResultModel> {
+    return this.http.get<BoardResultModel>(
+      `${this.baseUrl}/GetBoard?createNewBoard=${createNew}`
+    );
+  }
+  applyMove(move: Move) {
+    console.log(move);
+    this.apiMakeMove(move).subscribe((val) => {
+      this.loadBoard(false);
+    });
+  }
+  apiMakeMove(move: Move): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/MakeMove`, move);
   }
 
   getBoard() {}
