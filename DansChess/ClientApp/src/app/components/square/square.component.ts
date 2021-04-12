@@ -2,14 +2,10 @@ import { DataService } from './../../services/data.service';
 import { SquareModel } from 'app/models/SquareModel';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
   OnInit,
 } from '@angular/core';
-import { Move } from 'app/models/MoveModel';
-import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-square',

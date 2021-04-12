@@ -31,6 +31,8 @@ export class DataService {
   );
   public baseUrl: string = 'https://localhost:5001/game';
 
+  public isMate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public highlighted$: Observable<number[]> = combineLatest([
     this.currentSelectedSquare,
     this.moves$,
@@ -107,8 +109,8 @@ export class DataService {
       `${this.baseUrl}/GetBoard?createNewBoard=${createNew}`
     );
   }
+
   applyMove(move: Move) {
-    console.log(move);
     this.apiMakeMove(move).subscribe((val) => {
       this.loadBoard(false);
     });

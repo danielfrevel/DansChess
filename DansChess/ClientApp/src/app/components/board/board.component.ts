@@ -22,13 +22,5 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.data.initBoard();
-
-    // this.data.board$
-    //   .pipe(takeUntil(this.unsubscriber))
-    //   .subscribe((currentBoard) => {
-    //     this.squares = currentBoard;
-    //     this.cdr.detectChanges();
-    //   });
-    console.log(this);
   }
 }

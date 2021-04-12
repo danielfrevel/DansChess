@@ -5,6 +5,5 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
   public isFlipped: boolean = false;
-
   constructor() {}
 }
