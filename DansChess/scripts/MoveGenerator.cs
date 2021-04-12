@@ -38,6 +38,18 @@ public class MoveGenerator
 		opponentColour = board.OpponentColour;
 		friendlyColourIndex = (board.WhiteToMove) ? Board.WhiteIndex : Board.BlackIndex;
 	}
+	bool isCapture(int targetSquare){
+		return Piece.IsColour(board.Square[targetSquare], opponentColour);
+	}
+	
+	bool isKingCapture(int targetSquare){
+		int  targetPiece = board.Square[targetSquare];
+		//wenn gegner und piece dann king square
+		if (Piece.IsColour(targetPiece, opponentColour) && Piece.King == Piece.PieceType(targetPiece)){
+			return true;
+		}
+		return false;
+	}
 
 	void GenerateKingMoves()
 	{
@@ -51,12 +63,7 @@ public class MoveGenerator
 			{
 				continue;
 			}
-
-			bool isCapture = Piece.IsColour(pieceOnTargetSquare, opponentColour);
-			if (!isCapture)
-			{
-				continue;
-			}
+			
 			moves.Add(new Move(friendlyKingSquare, targetSquare));
 		}
 	}			
@@ -101,6 +108,10 @@ public class MoveGenerator
 					{
 						break;
 					}
+					if(isKingCapture(targetSquare)){
+						moves.Add(new Move(99,99));
+						break;
+					}
 					moves.Add(new Move(startSquare, targetSquare));
 				}
 			}
@@ -118,15 +129,15 @@ public class MoveGenerator
 				{
 					int targetSquare = knightMoves[startSquare][knightMoveIndex];
 					int targetSquarePiece = board.Square[targetSquare];
-					bool isCapture = Piece.IsColour(targetSquarePiece, opponentColour);
-					if (isCapture)
+					if (Piece.IsColour(targetSquarePiece, friendlyColour))
 					{
-						if (Piece.IsColour(targetSquarePiece, friendlyColour))
-						{
-							continue;
-						}
-						moves.Add(new Move(startSquare, targetSquare));
+						continue;
 					}
+					if(isKingCapture(targetSquare)){
+						moves.Add(new Move(99,99));
+						break;
+					}
+					moves.Add(new Move(startSquare, targetSquare));
 				}
 			}
 		}
@@ -141,7 +152,7 @@ public class MoveGenerator
 			{
 				int startSquare = myPawns[i];
 				int squareOneForward = startSquare + pawnOffset;
-
+				
 				// kann nur vor wenn nicht von anderem Piece blockiert
 				if (board.Square[squareOneForward] == Piece.None)
 				{
@@ -167,7 +178,10 @@ public class MoveGenerator
 						int targetSquare = startSquare + pawnCaptureDir;
 						int targetPiece = board.Square[targetSquare];
 
-
+						if(isKingCapture(targetSquare)){
+						moves.Add(new Move(99,99));
+						break;
+						}
 						if (Piece.IsColour(targetPiece, opponentColour))
 						{
 							moves.Add(new Move(startSquare, targetSquare));

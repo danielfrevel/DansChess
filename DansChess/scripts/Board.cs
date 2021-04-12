@@ -72,9 +72,6 @@ namespace Generation
 			ColourToMove = (WhiteToMove) ? Piece.White : Piece.Black;
 			OpponentColour = (WhiteToMove) ? Piece.Black : Piece.White;
 			ColourToMoveIndex = 1 - ColourToMoveIndex;
-
-
-
 		}
 
 			public void LoadPosition(string fen = Fen.startFen) 

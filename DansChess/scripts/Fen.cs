@@ -2,16 +2,6 @@
 
 namespace Generation
 {
-	public class LoadedPositionInfo
-	{
-		public int[] squares;
-		public bool whiteToMove;
-
-		public LoadedPositionInfo()
-		{
-			squares = new int[64];
-		}
-	}
 	public static class Fen
 	{
 		// Wikipedia: "Forsyth-Edwards-Notation ist eine Kurznotation mit der jede beliebige Brettstellung im Schach niedergeschrieben werden kann"
@@ -68,7 +58,7 @@ namespace Generation
 		}
 
 		// return: fen string des eingegeben Boards
-		public static string CurrentFen(Board board)
+		public static string CurrentFen(int[] board, bool whiteToMove)
 		{
 			string fen = "";
 			for (int rank = 7; rank >= 0; rank--)
@@ -77,7 +67,7 @@ namespace Generation
 				for (int file = 0; file < 8; file++)
 				{
 					int i = rank * 8 + file;
-					int piece = board.Square[i];
+					int piece = board[i];
 					if (piece != 0)
 					{
 						if (numEmptyFiles != 0)
@@ -128,7 +118,7 @@ namespace Generation
 			}
 
 			fen += ' ';
-			fen += (board.WhiteToMove) ? 'w' : 'b';
+			fen += (whiteToMove) ? 'w' : 'b';
 
 			return fen;
 		}

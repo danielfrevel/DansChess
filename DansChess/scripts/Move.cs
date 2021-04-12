@@ -1,7 +1,7 @@
 ﻿
 namespace Generation
 {
-	public struct Move
+	public class Move
 	{
 		//Idee aber zu faul: auch über bits abbilden und den move in einem int abbilden und mit Masks filtern
 		public int startSquare { get; set; }//gibt automatisch auch das Piece an
@@ -11,6 +11,10 @@ namespace Generation
 		{
 			startSquare = _startSquare;
 			targetSquare = _targetSquare;
+		}
+		public Move()
+		{
+			
 		}
 	}
 }

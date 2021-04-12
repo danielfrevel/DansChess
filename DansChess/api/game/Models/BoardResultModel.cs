@@ -5,7 +5,7 @@ namespace DansChess.api.game.Models
 {
     public class BoardResultModel
     {
-        public int[] Board { get; set; }
+        public int[] BoardRepresentation { get; set; }
         public IEnumerable<Move> Moves { get; set; }
         public BoardResultModel()
         {
