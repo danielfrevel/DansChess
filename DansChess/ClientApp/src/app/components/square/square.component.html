@@ -1,0 +1,15 @@
+<div
+  [ngClass]="{
+    square: true,
+    dark: !isLight(),
+    light: isLight(),
+    highlighted: isHigligheted$ | async
+  }"
+  (click)="showMoves()"
+>
+  <input
+    type="image"
+    [src]="getPieceImage()"
+    *ngIf="getPieceImage().length > 0"
+  />
+</div>
